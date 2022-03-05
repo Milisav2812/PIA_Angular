@@ -1,0 +1,166 @@
+<div class="resultDiv" *ngIf="gameOfTODAY" [hidden]="!canPlayGame">
+  <div class="scoreDiv">
+    <span>VREME:</span> {{remainingTime}}
+  </div>
+  <div class="scoreDiv">
+    <span>POENI:</span> {{numberOfPoints}}
+  </div>
+</div>
+<mat-accordion *ngIf="gameOfTODAY" [ngClass]="{hidden: !canPlayGame}">
+    <!-- ANAGRAM -->
+    <mat-expansion-panel class="firstMatPanel" [disabled]="anagramDone" [expanded]="!anagramDone">
+
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Anagram
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <form (submit)="onAnagramSubmit(anagramForm)" #anagramForm="ngForm">
+        <span class="anagramSpan">{{gameOfTODAY.anagramPhrase}}</span>
+        <mat-form-field>
+            <input type="text" matInput placeholder="Rešenje Anagrama"  name="anagramResult" ngModel #anagramResult="ngModel" maxlength="30">
+        </mat-form-field>
+        <button class="anagramButton" type="submit" mat-raised-button>Završi Anagram</button>
+      </form>
+
+    </mat-expansion-panel>
+
+    <!-- MY NUMBER -->
+    <mat-expansion-panel [disabled]="!anagramDone || myNumber" [expanded]="!myNumber && anagramDone">
+
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+            Moj Broj
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <form (submit)="onMyNumberSubmit()">
+        <div class="myNumberDiv">
+          <div class="mainNumberDiv">
+            {{mainNumber}}
+          </div>
+          <div class="numbersDiv">
+            <div class="firstNumbersDiv">
+              <button type="button" mat-button [disabled]="numBool[0] || !stop" (click)="addChartoResult(num[0]); numBool[0]=true">{{num[0]}}</button>
+              <button type="button" mat-button [disabled]="numBool[1] || !stop" (click)="addChartoResult(num[1]); numBool[1]=true">{{num[1]}}</button>
+              <button type="button" mat-button [disabled]="numBool[2] || !stop" (click)="addChartoResult(num[2]); numBool[2]=true">{{num[2]}}</button>
+              <button type="button" mat-button [disabled]="numBool[3] || !stop" (click)="addChartoResult(num[3]); numBool[3]=true">{{num[3]}}</button>
+            </div>
+            <div class="secondNumberDiv">
+                <button type="button" mat-button [disabled]="numBool[4] || !stop" (click)="addChartoResult(num[4]); numBool[4]=true">{{num[4]}}</button>
+            </div>
+            <div class="thirdNumberDiv">
+                <button type="button" mat-button [disabled]="numBool[5] || !stop" (click)="addChartoResult(num[5]); numBool[5]=true">{{num[5]}}</button>
+            </div>
+          </div>
+          <button type="button" class="stopButton" mat-raised-button (click)="numberSTOP()" [disabled]="stop">STOP</button>
+
+          <div class="characterDiv">
+            <button type="button" mat-button [disabled]="!stop" (click)="addChartoResult(40)">(</button>
+            <button type="button" mat-button [disabled]="!stop" (click)="addChartoResult(41)">)</button>
+            <button type="button" mat-button [disabled]="!stop" (click)="addChartoResult(43)">+</button>
+            <button type="button" mat-button [disabled]="!stop" (click)="addChartoResult(45)">-</button>
+            <button type="button" mat-button [disabled]="!stop" (click)="addChartoResult(42)">*</button>
+            <button type="button" mat-button [disabled]="!stop" (click)="addChartoResult(47)">/</button>
+          </div>
+        </div>
+
+        <div class="resultStringDiv">
+          <span> <span>IZRAZ:</span> {{stringForCalculation}}</span>
+          <span> <span>REZULTAT:</span> {{resultOfCalculation}}</span>
+        </div>
+
+        <button class="stopButton" type="submit" mat-raised-button>Završite Moj Broj</button>
+        <button color="accent" type="button" mat-raised-button (click)="deleteResultString()">Obrišite</button>
+
+      </form>
+
+    </mat-expansion-panel>
+
+    <!-- National Geographic -->
+    <mat-expansion-panel [disabled]="!anagramDone || !myNumber" [expanded]="anagramDone && myNumber">
+
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+            Zanimljiva Geografija
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="letterDiv">
+        <span>SLOVO: </span> {{myLetter}}
+      </div>
+
+      <form [formGroup]="formGeo" (submit)="finishGameOfDay()">
+
+        <!-- Drzava -->
+        <mat-form-field>
+          <input type="text" matInput formControlName="country" name="country" placeholder="Država" [hidden]="!stopLetter">
+          <mat-error *ngIf="formGeo.get('country').invalid"> Mora početi slovom {{myLetter}} </mat-error>
+        </mat-form-field>
+
+        <!-- Grad -->
+        <mat-form-field>
+          <input type="text" matInput formControlName="city" name="city" placeholder="Grad" [hidden]="!stopLetter">
+          <mat-error *ngIf="formGeo.get('city').invalid"> Mora početi slovom {{myLetter}} </mat-error>
+        </mat-form-field>
+
+        <!-- Jezero -->
+        <mat-form-field>
+          <input type="text" matInput formControlName="lake" name="lake" placeholder="Jezero" [hidden]="!stopLetter">
+          <mat-error *ngIf="formGeo.get('lake').invalid"> Mora početi slovom {{myLetter}} </mat-error>
+        </mat-form-field>
+
+        <!-- Planina -->
+        <mat-form-field>
+          <input type="text" matInput formControlName="mountain" name="mountain" placeholder="Planina" [hidden]="!stopLetter">
+          <mat-error *ngIf="formGeo.get('mountain').invalid"> Mora početi slovom {{myLetter}} </mat-error>
+        </mat-form-field>
+
+        <!-- Reke -->
+        <mat-form-field>
+          <input type="text" matInput formControlName="river" name="river" placeholder="Reka" [hidden]="!stopLetter">
+          <mat-error *ngIf="formGeo.get('river').invalid"> Mora početi slovom {{myLetter}} </mat-error>
+        </mat-form-field>
+
+        <!-- Zivotinja -->
+        <mat-form-field>
+          <input type="text" matInput formControlName="animal" name="animal" placeholder="Životinja" [hidden]="!stopLetter">
+          <mat-error *ngIf="formGeo.get('animal').invalid"> Mora početi slovom {{myLetter}} </mat-error>
+        </mat-form-field>
+
+        <!-- Biljke -->
+        <mat-form-field>
+          <input type="text" matInput formControlName="plant" name="plant" placeholder="Biljka" [hidden]="!stopLetter">
+          <mat-error *ngIf="formGeo.get('plant').invalid"> Mora početi slovom {{myLetter}} </mat-error>
+        </mat-form-field>
+
+        <!-- Grupa -->
+        <mat-form-field>
+          <input type="text" matInput formControlName="band" name="band" placeholder="Muzička Grupa" [hidden]="!stopLetter">
+          <mat-error *ngIf="formGeo.get('band').invalid"> Mora početi slovom {{myLetter}} </mat-error>
+        </mat-form-field>
+
+        <div class="geoButtonDiv">
+          <button color="accent" type="button" mat-raised-button [disabled]="stopLetter" (click)="letterTimerStop()">STOP</button>
+          <button class="geoButton" type="submit" mat-raised-button>Završite igru dana</button>
+        </div>
+
+      </form>
+
+    </mat-expansion-panel>
+
+  </mat-accordion>
+
+<mat-card class="warningNoteDiv" [ngClass]="{hidden: canPlayGame || alreadyPlayed}">
+  <h1>Pažnja!</h1>
+  <span> Danas ste već odigrali igru dana! Molimo vas da sačekate da vam supervizor pregleda unete reči za Zanimljivu Geografiju! </span>
+</mat-card>
+
+<mat-card class="warningNoteDiv" [ngClass]="{hidden: !alreadyPlayed}">
+  <h3>Informacije o današnjoj igri:</h3>
+
+  <span>Datum: </span> {{ gameOfTODAY ? gameOfTODAY.gameDate.toString().substr(0,15) : " " }}
+  <br>
+  <span>Broj osvojenih poena: </span> {{godResult ? godResult.result : " "}}
+</mat-card>

@@ -1,0 +1,349 @@
+<mat-card *ngIf="showInfo">
+  <div class="userInfoDiv">
+    <img [src]="userInfo.imagePath" alt="">
+    <div class="textDiv">
+      {{userInfo.name}} {{userInfo.surname}}
+    </div>
+    <span>E-mail:</span> {{userInfo.email}}
+    <br>
+    {{userInfo.occupation}}
+  </div>
+</mat-card>
+
+<mat-accordion>
+
+  <!-- Add New Anagram -->
+  <mat-expansion-panel style="margin-top: 20px">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Dodaj novi Anagram
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <form (submit)="onAddAnagram(anagramForm)" #anagramForm="ngForm">
+      <mat-form-field>
+        <input matInput name="phrase" placeholder="Zagonetka" ngModel #phrase="ngModel" required>
+        <mat-error *ngIf="phrase.invalid">Morate uneti početnu zagonetku!</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput name="result" placeholder="Rešenje" ngModel #result="ngModel" required>
+        <mat-error *ngIf="result.invalid">Morate uneti rešenje!</mat-error>
+      </mat-form-field>
+
+      <div class="submitAnagramButton">
+        <button mat-raised-button type="submit">Dodajte Anagram</button>
+      </div>
+    </form>
+
+  </mat-expansion-panel>
+
+  <!--Delete Anagram-->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Brisanje Anagrama
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-select placeholder="Anagrami" [(ngModel)]="deleteAnagramID">
+      <span *ngFor="let anagram of anagrams">
+        <mat-option value="{{anagram._id}}">
+          {{anagram.phrase}} :: {{anagram.result}}
+        </mat-option>
+      </span>
+    </mat-select>
+
+    <button mat-raised-button class="deleteButton" type="button" (click)="onAnagramDelete()">Obriši Anagram</button>
+
+  </mat-expansion-panel>
+
+  <!-- Add Nat Geo Word -->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Dodaj Reči za Zanimljivu Geografiju
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <!-- Country -->
+    <div class="addWordDiv">
+      <mat-form-field>
+        <input matInput type="text" name="country" [(ngModel)]="country" placeholder="Država">
+      </mat-form-field>
+      <button mat-raised-button color="accent" [disabled]="!country" (click)="addNatGeoWord(0,country)">Dodaj</button>
+    </div>
+
+    <!-- City -->
+    <div class="addWordDiv">
+      <mat-form-field>
+        <input matInput type="text" name="city" [(ngModel)]="city" placeholder="Grad">
+      </mat-form-field>
+      <button mat-raised-button color="accent" [disabled]="!city" (click)="addNatGeoWord(1,city)">Dodaj</button>
+    </div>
+
+    <!-- Lake -->
+    <div class="addWordDiv">
+      <mat-form-field>
+        <input matInput type="text" name="lake" [(ngModel)]="lake" placeholder="Jezero">
+      </mat-form-field>
+      <button mat-raised-button color="accent" [disabled]="!lake" (click)="addNatGeoWord(2,lake)">Dodaj</button>
+    </div>
+
+    <!-- Mountain -->
+    <div class="addWordDiv">
+      <mat-form-field>
+        <input matInput type="text" name="mountain" [(ngModel)]="mountain" placeholder="Planina">
+      </mat-form-field>
+      <button mat-raised-button color="accent" [disabled]="!mountain" (click)="addNatGeoWord(3,mountain)">Dodaj</button>
+    </div>
+
+    <!-- River -->
+    <div class="addWordDiv">
+      <mat-form-field>
+        <input matInput type="text" name="river" [(ngModel)]="river" placeholder="Reka">
+      </mat-form-field>
+      <button mat-raised-button color="accent" [disabled]="!river" (click)="addNatGeoWord(4,river)">Dodaj</button>
+    </div>
+
+    <!-- Animal -->
+    <div class="addWordDiv">
+      <mat-form-field>
+        <input matInput type="text" name="animal" [(ngModel)]="animal" placeholder="Životinja">
+      </mat-form-field>
+      <button mat-raised-button color="accent" [disabled]="!animal" (click)="addNatGeoWord(5,animal)">Dodaj</button>
+    </div>
+
+    <!-- Plant -->
+    <div class="addWordDiv">
+      <mat-form-field>
+        <input matInput type="text" name="plant" [(ngModel)]="plant" placeholder="Biljka">
+      </mat-form-field>
+      <button mat-raised-button color="accent" [disabled]="!plant" (click)="addNatGeoWord(6,plant)">Dodaj</button>
+    </div>
+
+    <!-- Band -->
+    <div class="addWordDiv">
+      <mat-form-field>
+        <input matInput type="text" name="band" [(ngModel)]="band" placeholder="Muzička Grupa">
+      </mat-form-field>
+      <button mat-raised-button color="accent" [disabled]="!band" (click)="addNatGeoWord(7,band)">Dodaj</button>
+    </div>
+
+  </mat-expansion-panel>
+
+  <!-- Delete Words Nat Geo -->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Brisanje reči za Zanimljivu Geografiju
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <!-- Country -->
+    <div class="deleteWordDiv">
+      <mat-select placeholder="Države" [(ngModel)]="countryID">
+        <span *ngFor="let word of countryList">
+          <mat-option value="{{word._id}}">
+            {{word.word}}
+          </mat-option>
+        </span>
+      </mat-select>
+      <button mat-raised-button color="warn" [disabled]="countryID.length == 0" (click)="deleteNatGeoWord(0, countryID)">Obriši</button>
+    </div>
+
+    <!-- City -->
+    <div class="deleteWordDiv">
+      <mat-select placeholder="Gradovi" [(ngModel)]="cityID">
+        <span *ngFor="let word of cityList">
+          <mat-option value="{{word._id}}">
+            {{word.word}}
+          </mat-option>
+        </span>
+      </mat-select>
+      <button mat-raised-button color="warn" [disabled]="cityID.length == 0" (click)="deleteNatGeoWord(1, cityID)">Obriši</button>
+    </div>
+
+    <!-- Lake -->
+    <div class="deleteWordDiv">
+      <mat-select placeholder="Jezera" [(ngModel)]="lakeID">
+        <span *ngFor="let word of lakeList">
+          <mat-option value="{{word._id}}">
+            {{word.word}}
+          </mat-option>
+        </span>
+      </mat-select>
+      <button mat-raised-button color="warn" [disabled]="lakeID.length == 0" (click)="deleteNatGeoWord(2, lakeID)">Obriši</button>
+    </div>
+
+    <!-- Mountain -->
+    <div class="deleteWordDiv">
+      <mat-select placeholder="Planine" [(ngModel)]="mountainID">
+        <span *ngFor="let word of mountainList">
+          <mat-option value="{{word._id}}">
+            {{word.word}}
+          </mat-option>
+        </span>
+      </mat-select>
+      <button mat-raised-button color="warn" [disabled]="mountainID.length == 0" (click)="deleteNatGeoWord(3, mountainID)">Obriši</button>
+    </div>
+
+    <!-- River -->
+    <div class="deleteWordDiv">
+      <mat-select placeholder="Reke" [(ngModel)]="riverID">
+        <span *ngFor="let word of riverList">
+          <mat-option value="{{word._id}}">
+            {{word.word}}
+          </mat-option>
+        </span>
+      </mat-select>
+      <button mat-raised-button color="warn" [disabled]="riverID.length == 0" (click)="deleteNatGeoWord(4, riverID)">Obriši</button>
+    </div>
+
+    <!-- Animal -->
+    <div class="deleteWordDiv">
+      <mat-select placeholder="Životinje" [(ngModel)]="animalID">
+        <span *ngFor="let word of animalList">
+          <mat-option value="{{word._id}}">
+            {{word.word}}
+          </mat-option>
+        </span>
+      </mat-select>
+      <button mat-raised-button color="warn" [disabled]="animalID.length == 0" (click)="deleteNatGeoWord(5, animalID)">Obriši</button>
+    </div>
+
+    <!-- Plant -->
+    <div class="deleteWordDiv">
+      <mat-select placeholder="Biljke" [(ngModel)]="plantID">
+        <span *ngFor="let word of plantList">
+          <mat-option value="{{word._id}}">
+            {{word.word}}
+          </mat-option>
+        </span>
+      </mat-select>
+      <button mat-raised-button color="warn" [disabled]="plantID.length == 0" (click)="deleteNatGeoWord(6, plantID)">Obriši</button>
+    </div>
+
+    <!-- Band -->
+    <div class="deleteWordDiv">
+      <mat-select placeholder="Muzičke Grupe" [(ngModel)]="bandID">
+        <span *ngFor="let word of bandList">
+          <mat-option value="{{word._id}}">
+            {{word.word}}
+          </mat-option>
+        </span>
+      </mat-select>
+      <button mat-raised-button color="warn" [disabled]="bandID.length == 0" (click)="deleteNatGeoWord(7, bandID)">Obriši</button>
+    </div>
+
+  </mat-expansion-panel>
+
+
+  <!-- Verify Nat Geo -->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Provera Zanimljive Geografije
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-card class="natGeoDiv" *ngFor="let natGeo of natGeos" [ngClass]="{hidden: natGeo.verified}">
+      <div class="userInfoDiv">
+        <span> Korisničko ime: </span> {{natGeo.username}}
+        <br>
+        <span> Datum Igre: </span> {{natGeo.gameDate.toString().substr(0,15)}}
+      </div>
+      <!-- COUNTRY -->
+      <div *ngIf="natGeo.country">
+        <div class="contentDiv">
+          <span>Država:</span> {{natGeo.country}}
+        </div>
+        <div class="buttonDiv">
+          <button mat-raised-button color="accent" type="button" (click)="addNatGeoInfo(0, natGeo.country)">Sačuvaj</button>
+          <button mat-raised-button color="warn" type="button" (click)="deleteNatGeoElem(0, natGeo.country)">Obriši</button>
+        </div>
+        <hr>
+      </div>
+      <!-- CITY -->
+      <div *ngIf="natGeo.city">
+        <div class="contentDiv">
+          <span>Grad:</span> {{natGeo.city}}
+        </div>
+        <div class="buttonDiv">
+          <button mat-raised-button color="accent" type="button" (click)="addNatGeoInfo(1, natGeo.city)">Sačuvaj</button>
+          <button mat-raised-button color="warn" type="button" (click)="deleteNatGeoElem(1, natGeo.city)">Obriši</button>
+        </div>
+        <hr>
+      </div>
+      <!-- LAKE -->
+      <div *ngIf="natGeo.lake">
+        <div class="contentDiv">
+          <span>Jezero:</span> {{natGeo.lake}}
+        </div>
+        <div class="buttonDiv">
+          <button mat-raised-button color="accent" type="button" (click)="addNatGeoInfo(2, natGeo.lake)">Sačuvaj</button>
+          <button mat-raised-button color="warn" type="button" (click)="deleteNatGeoElem(2, natGeo.lake)">Obriši</button>
+        </div>
+        <hr>
+      </div>
+      <!-- MOUNTAIN -->
+      <div *ngIf="natGeo.mountain">
+        <div class="contentDiv">
+          <span>Planina:</span> {{natGeo.mountain}}
+        </div>
+        <div class="buttonDiv">
+          <button mat-raised-button color="accent" type="button" (click)="addNatGeoInfo(3, natGeo.mountain)">Sačuvaj</button>
+          <button mat-raised-button color="warn" type="button" (click)="deleteNatGeoElem(3, natGeo.mountain)">Obriši</button>
+        </div>
+        <hr>
+      </div>
+      <!-- RIVER -->
+      <div *ngIf="natGeo.river">
+        <div class="contentDiv">
+          <span>Reka:</span> {{natGeo.river}}
+        </div>
+        <div class="buttonDiv">
+          <button mat-raised-button color="accent" type="button" (click)="addNatGeoInfo(4, natGeo.river)">Sačuvaj</button>
+          <button mat-raised-button color="warn" type="button" (click)="deleteNatGeoElem(4, natGeo.river)">Obriši</button>
+        </div>
+        <hr>
+      </div>
+      <!-- ANIMAL -->
+      <div *ngIf="natGeo.animal">
+        <div class="contentDiv">
+          <span>Životinja:</span> {{natGeo.animal}}
+        </div>
+        <div class="buttonDiv">
+          <button mat-raised-button color="accent" type="button" (click)="addNatGeoInfo(5, natGeo.animal)">Sačuvaj</button>
+          <button mat-raised-button color="warn" type="button" (click)="deleteNatGeoElem(5, natGeo.animal)">Obriši</button>
+        </div>
+        <hr>
+      </div>
+      <!-- PLANT -->
+      <div *ngIf="natGeo.plant">
+        <div class="contentDiv">
+          <span>Biljka:</span> {{natGeo.plant}}
+        </div>
+        <div class="buttonDiv">
+          <button mat-raised-button color="accent" type="button" (click)="addNatGeoInfo(6, natGeo.plant)">Sačuvaj</button>
+          <button mat-raised-button color="warn" type="button" (click)="deleteNatGeoElem(6, natGeo.plant)">Obriši</button>
+        </div>
+        <hr>
+      </div>
+      <!-- BAND -->
+      <div *ngIf="natGeo.band">
+        <div class="contentDiv">
+          <span>Muzička grupa:</span> {{natGeo.band}}
+        </div>
+        <div class="buttonDiv">
+          <button mat-raised-button color="accent" type="button" (click)="addNatGeoInfo(7, natGeo.band)">Sačuvaj</button>
+          <button mat-raised-button color="warn" type="button" (click)="deleteNatGeoElem(7, natGeo.band)">Obriši</button>
+        </div>
+        <hr>
+      </div>
+      <button type="button" mat-raised-button class="verifyButton" (click)="verifyGame(natGeo._id)" >Završi Verifikaciju</button>
+    </mat-card>
+
+</mat-expansion-panel>
+
+  </mat-accordion>

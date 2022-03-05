@@ -1,0 +1,62 @@
+<mat-card *ngIf="!correctUsername && !correctAnswer">
+  <form [formGroup]="validateUserForm" (submit)="onValidateUser()">
+
+    <!-- Username -->
+    <mat-form-field>
+      <input type="text" matInput formControlName="username" name="username" placeholder="Korisničko ime">
+      <mat-error *ngIf="validateUserForm.get('username').invalid"> Korisničko ime mora imati barem 3 karaktera! </mat-error>
+    </mat-form-field>
+
+    <!-- JMBG -->
+    <mat-form-field>
+      <input matInput formControlName="jmbg" type="text" name="jmbg" placeholder="JMBG">
+      <mat-error *ngIf="validateUserForm.get('jmbg').invalid">Nije dobar format!</mat-error>
+    </mat-form-field>
+
+    <div class="submitButtonContainer">
+      <button class="submitButton" mat-raised-button color="primary" type="submit">Nastavi Dalje</button>
+    </div>
+  </form>
+</mat-card>
+
+<mat-card *ngIf="correctUsername && !correctAnswer">
+    <form [formGroup]="questionForm" (submit)="onAnswerSubmit()">
+
+    <!-- Question -->
+    <div class="questionDiv">
+      <span>Pitanje: </span> {{ question }}
+    </div>
+
+    <!-- Answer -->
+    <mat-form-field>
+      <input matInput formControlName="answer" type="text" name="answer" placeholder="Odgovor">
+      <mat-error *ngIf="questionForm.get('answer').invalid"> Morate uneti odgovor! </mat-error>
+    </mat-form-field>
+
+    <div class="submitButtonContainer">
+      <button class="submitButton" mat-raised-button color="primary" type="submit">Nastavi Dalje</button>
+    </div>
+    </form>
+  </mat-card>
+
+  <mat-card *ngIf="correctAnswer && correctUsername">
+      <form [formGroup]="newPassForm" (submit)="onNewPassword()">
+
+        <!-- New Password -->
+        <mat-form-field>
+          <input matInput formControlName="password" type="password" name="password" placeholder="Nova lozinka">
+          <mat-error *ngIf="newPassForm.get('password').invalid">Morate uneti novu lozinku!</mat-error>
+        </mat-form-field>
+
+        <!-- New Confirm Password -->
+        <mat-form-field>
+          <input matInput formControlName="confirmPassword" type="password" name="confirmPassword" placeholder="Potvrda nove lozinke">
+          <mat-error *ngIf="newPassForm.get('confirmPassword').invalid">Lozinke se ne poklapaju!</mat-error>
+        </mat-form-field>
+
+        <div class="submitButtonContainer">
+          <button mat-raised-button color="primary" type="submit" class="submitButton">Sačuvaj novu lozinku</button>
+        </div>
+
+      </form>
+    </mat-card>

@@ -1,0 +1,82 @@
+mat-card{
+  width: 40%;
+  margin: 20px auto;
+}
+
+mat-form-field{
+  margin: 10px auto;
+  display: block;
+}
+
+mat-radio-button{
+  margin-right: 10px;
+}
+
+label{
+  margin-right: 10px;
+}
+
+.hidden{
+  visibility: hidden;
+}
+
+.image-preview{
+  width: 100%;
+  text-align: center;
+}
+
+.image-preview > img{
+  max-width: 500px;
+}
+
+.error{
+  color: #e85a4f;
+  font-size: 20px;
+}
+
+/* Login Button */
+.submitButtonContainer{
+  text-align: left;
+}
+
+.submitButton{
+  background: #eae7dc;
+  color: #e85a4f;
+  position: relative;
+  top: -37px;
+}
+
+/* Image Button */
+.imageDiv{
+  display: block;
+  text-align: right;
+}
+
+.selectImgButton{
+  background: #e85a4f;
+  color: #eae7dc;
+}
+
+/* Mobile Phones <= 768px */
+@media only screen and (max-width: 768px) {
+  mat-card{
+    width: 80%
+  }
+
+  .submitButtonContainer{
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  .submitButton{
+    top: 0;
+  }
+
+  .imageDiv{
+    text-align: center;
+  }
+
+  .errorDiv{
+    text-align: center;
+  }
+}

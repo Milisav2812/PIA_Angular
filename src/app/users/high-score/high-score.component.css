@@ -1,0 +1,47 @@
+mat-card{
+  width: 60%;
+  margin: 10px auto;
+}
+
+.highScoreDiv > h3{
+  color: #e85a4f;
+}
+
+table{
+  width: 100%;
+  text-align: center
+}
+
+th{
+  background: #d8c3a5;
+  color: #e85a4f;
+  padding: 5px;
+  font-size: 18px;
+}
+
+td{
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.myScore{
+  color: #e85a4f;
+}
+
+@media only screen and (max-width: 768px) {
+  mat-card{
+    width: 80%;
+  }
+  /* Score Table */
+  .table{
+    width: 80%;
+  }
+
+  th{
+    font-size: 12px;
+  }
+
+  td{
+    font-size: 10px;
+  }
+}

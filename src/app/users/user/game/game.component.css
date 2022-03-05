@@ -1,0 +1,189 @@
+mat-expansion-panel{
+  width: 60%;
+  margin: 0 auto;
+}
+
+mat-panel-title{
+  font-weight: bold;
+  color: #e85a4f;
+}
+
+.hidden{
+  display: none;
+}
+
+.firstMatPanel{
+  margin-top: 20px
+}
+
+.addGameButtonDiv{
+  text-align: center;
+}
+
+.addGameButton{
+  background: #e85a4f;
+  color: #eae7dc;
+}
+
+/* ANAGRAM */
+.anagramSpan{
+  display: block;
+  font-size: 15px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+mat-form-field{
+  width: 70%;
+}
+
+.anagramButton{
+  display: block;
+  background: #e85a4f;
+  color: #eae7dc;
+}
+
+/* My Number */
+.myNumberDiv{
+  text-align: center;
+}
+
+.mainNumberDiv{
+  display: block;
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.numbersDiv{
+  margin: 30px 0;
+}
+
+.firstNumbersDiv{
+  display: inline-block;
+  width: 60%;
+}
+
+.secondNumberDiv{
+  display: inline-block;
+  width: 20%;
+}
+
+.thirdNumberDiv{
+  display: inline-block;
+  width: 20%;
+}
+
+.numbersDiv > div > button{
+  font-size: 20px;
+}
+
+.stopButton{
+  background: #e85a4f;
+  color: #eae7dc;
+}
+
+.characterDiv{
+  display: block;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.resultStringDiv{
+  display: block;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.resultStringDiv > span{
+  display: inline-block;
+  width: 50%;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.resultStringDiv > span > span{
+  color: #e85a4f
+}
+
+.myNumberButtons{
+  text-align: center;
+}
+
+/* Result DIV */
+.resultDiv{
+  width: 60%;
+  margin: 10px auto;
+  text-align: center;
+}
+
+.resultDiv > div{
+  width: 40%;
+  text-align: center;
+  display: inline-block;
+  padding: 20px;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.resultDiv > div > span{
+  font-size: 20px;
+  color: #e85a4f;
+}
+
+/* National Geographic */
+.letterDiv{
+  text-align: center;
+  margin: 10px auto;
+  font-weight: bold;
+  font-size: 30px
+}
+
+.letterDiv > span{
+  font-size: 20px;
+  color: #e85a4f
+}
+
+form{
+  text-align: center;
+}
+
+.geoButton{
+  background: #e85a4f;
+  color: #eae7dc;
+}
+
+.geoButtonDiv{
+  margin: 10px auto;
+  width: 100%;
+  display: block;
+}
+
+.warningNoteDiv{
+  margin: 20px auto;
+  width: 60%;
+  align-self: center;
+  text-align: center;
+}
+
+.warningNoteDiv > h1, h2, h3, h4{
+  color: #e85a4f;
+  padding: 10px
+}
+
+.warningNoteDiv > span{
+  font-weight: bold;
+}
+
+/* Mobile Phones <= 768px */
+@media only screen and (max-width: 768px) {
+
+  .resultDiv{
+    width: 90%;
+  }
+
+  mat-expansion-panel{
+    width: 90%
+  }
+}
+

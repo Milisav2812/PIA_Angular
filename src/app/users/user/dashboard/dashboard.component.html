@@ -1,0 +1,94 @@
+<mat-card class="userInfoCard" *ngIf="showInfo">
+  <div class="userInfoDiv">
+    <img [src]="userInfo.imagePath" alt="">
+    <div class="textDiv">
+      {{userInfo.name}} {{userInfo.surname}}
+    </div>
+    <span>E-mail:</span> {{userInfo.email}}
+    <br>
+    {{userInfo.occupation}}
+  </div>
+</mat-card>
+
+<mat-card *ngIf="isHighScore">
+    <div class="highScoreDiv">
+      <h3>Rang Lista za Igru Dana</h3>
+      <table>
+        <tr>
+          <th>
+            R. Br.
+          </th>
+          <th>
+            Korisničko ime
+          </th>
+          <th>
+            Datum Odigrane Igre
+          </th>
+          <th>
+            Broj Poena
+          </th>
+        </tr>
+        <tr *ngFor="let score of highScore; let i=index" [attr.data-index]="i" [ngClass]="{myScore: score.username == username}">
+          <td *ngIf="i < 10">
+            {{i + 1}}.
+          </td>
+          <td *ngIf="i < 10">
+            {{score.username}}
+          </td>
+          <td *ngIf="i < 10">
+            {{score.gameDate.toString().substr(0,15)}}
+          </td>
+          <td *ngIf="i < 10">
+            {{score.result}}
+          </td>
+        </tr>
+        <tr *ngIf="(myIndex + 1) > 10" class="myScore">
+          <td>
+            {{myIndex + 1}}.
+          </td>
+          <td>
+            {{godResult.username}}
+          </td>
+          <td>
+            {{godResult.gameDate.toString().substr(0,15)}}
+          </td>
+          <td>
+            {{godResult.result}}
+          </td>
+        </tr>
+      </table>
+    </div>
+</mat-card>
+
+<mat-accordion>
+    <mat-expansion-panel style="margin-top: 10px;">
+
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Započni igru dana
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="startGameDiv">
+        <button class="startGameButton" mat-raised-button (click)="onGameStart()">Započni Igru</button>
+      </div>
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Rang Liste
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="startGameDiv">
+        <button class="startGameButton" mat-raised-button (click)="onHighScore()">Pregledaj Rang Liste</button>
+      </div>
+
+    </mat-expansion-panel>
+
+  </mat-accordion>
+
+

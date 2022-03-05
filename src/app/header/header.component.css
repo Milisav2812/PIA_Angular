@@ -1,0 +1,107 @@
+.mat-toolbar{
+  background: #eae7dc;
+}
+
+ul{
+  margin: 0;
+  padding: 0;
+}
+
+li{
+  list-style-type: none;
+  display: inline-block;
+}
+
+li > a{
+  text-decoration: none;
+  color: #e98074;
+  padding: 10px;
+}
+
+li > a:hover{
+  color: #e85a4f;
+}
+
+.flex{
+  flex: auto;
+}
+
+.logo > a{
+  color: #e85a4f;
+  text-decoration: none;
+}
+
+.logoutButton > a{
+  text-decoration: none;
+  color: #eae7dc;
+  background: #e85a4f;
+  padding: 10px 20px;
+  border-radius: 15px
+}
+
+.logoutButton > a:hover{
+  border: 2px solid #e85a4f;
+  background: #eae7dc;
+  color: #e85a4f;
+}
+
+/* Responsive Navabar */
+.responsiveNavbarDiv{
+  display: none;
+}
+
+.navBarItem{
+  display: none;
+}
+
+.dropdownMenuButton{
+  color: #e85a4f;
+  margin-right: 10px;
+  padding: 5px;
+}
+
+.dropdownMenu{
+  display: none;
+}
+
+.hidden{
+  display: block;
+  visibility: visible;
+}
+
+/* Mobile Phones <= 768px */
+@media only screen and (max-width: 768px) {
+  .navbarList{
+    display: none;
+  }
+
+  .dropdownMenu{
+    display: block;
+  }
+
+  .responsiveNavbarDiv{
+    text-align: center;
+    padding: 10px;
+    background: #eae7dc;
+    color: #e85a4f;
+  }
+
+  div.navBarItem{
+    display: block;
+    padding: 5px
+  }
+
+  .navBarItem > a{
+    text-decoration: none;
+    color: #e98074;
+  }
+
+  .navBarItem > a:hover{
+    color: #e85a4f;
+  }
+
+  .logoutButton > a{
+    padding: 5px 10px;
+    border-radius: 15px
+  }
+}

@@ -1,0 +1,106 @@
+mat-expansion-panel{
+  width: 60%;
+  margin: 0 auto;
+}
+
+mat-panel-title{
+  font-weight: bold;
+  color: #e85a4f;
+}
+
+mat-form-field{
+  width: 80%;
+}
+
+mat-card{
+  width: 40%;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+.firstMatPanel{
+  margin-top: 20px
+}
+
+.addGameButtonDiv{
+  text-align: center;
+}
+
+.addGameButton{
+  background: #e85a4f;
+  color: #eae7dc;
+}
+
+.updateForm{
+  text-align: center;
+}
+
+.updateForm > .dateDiv{
+  width: 100%;
+  text-align: center;
+  font-size: 15px;
+}
+
+.updateForm > .dateDiv > span{
+  color: #e85a4f;
+  font-weight: bold;
+}
+
+.updateGameButton{
+  background: #e85a4f;
+  color: #eae7dc;
+}
+
+.messageDiv{
+  font-size: 15px;
+  font-weight: bold;
+}
+
+
+.userInfoDiv{
+  text-align: center;
+  font-size: 20px;
+}
+
+.userInfoDiv > img{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 50%;
+  width: 50%;
+}
+
+.userInfoDiv > span{
+  font-weight: bold;
+  color: #e85a4f;
+}
+
+.textDiv{
+  color: #e85a4f;
+  font-size: 25px;
+  font-weight: bold;
+  margin: 20px auto;
+}
+
+/* Mobile Phones <= 768px */
+@media only screen and (max-width: 768px) {
+  mat-expansion-panel{
+    width: 90%
+  }
+
+  /* User Info in Mobile */
+  mat-card{
+    width: 80%;
+  }
+
+  .textDiv{
+    font-size: 15px;
+  }
+
+  .userInfoDiv{
+    font-size: 15px;
+  }
+
+  .userInfoDiv > img{
+    width: 60%;
+  }
+}
+

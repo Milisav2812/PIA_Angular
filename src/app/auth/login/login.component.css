@@ -1,0 +1,47 @@
+mat-card{
+  width: 40%;
+  margin: 20px auto;
+}
+
+mat-form-field{
+  margin: 10px auto;
+  display: block;
+}
+
+/* Login Button */
+.submitButtonContainer{
+  text-align: left;
+}
+
+.submitButton{
+  background: #eae7dc;
+  color: #e85a4f;
+}
+
+/* Frogot Pass Link */
+.forgotPass{
+  text-align: right;
+}
+
+.forgotPass > a{
+  text-decoration: none;
+  color: #e85a4f;
+}
+
+
+
+/* Mobile Phones <= 768px */
+@media only screen and (max-width: 768px) {
+  mat-card{
+    width: 80%
+  }
+
+  .submitButtonContainer{
+    text-align: center;
+  }
+
+  .forgotPass{
+    margin-top: 20px;
+    text-align: center;
+  }
+}

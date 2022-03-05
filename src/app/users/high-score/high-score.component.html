@@ -1,0 +1,71 @@
+<mat-card>
+    <div class="highScoreDiv">
+      <h3>Trenutni Mesec</h3>
+      <table>
+        <tr>
+          <th>
+            R. Br.
+          </th>
+          <th>
+            Korisničko Ime Igrača
+          </th>
+          <th>
+            Datum Odigrane Igre
+          </th>
+          <th>
+            Broj Poena
+          </th>
+        </tr>
+        <tr *ngFor="let score of highScoreMonth; let i=index" [attr.data-index]="i" [ngClass]="{myScore: score.username === username}">
+          <td *ngIf="i < 10">
+            {{i + 1}}.
+          </td>
+          <td *ngIf="i < 10">
+            {{score.username}}
+          </td>
+          <td *ngIf="i < 10">
+            {{score.gameDate.toString().substr(0,15)}}
+          </td>
+          <td *ngIf="i < 10">
+            {{score.result}}
+          </td>
+        </tr>
+      </table>
+    </div>
+</mat-card>
+
+<mat-card>
+    <div class="highScoreDiv">
+      <h3>Poslednjih 20 dana</h3>
+      <table>
+        <tr>
+          <th>
+            R. Br.
+          </th>
+          <th>
+            Korisničko Ime Igrača
+          </th>
+          <th>
+            Datum Odigrane Igre
+          </th>
+          <th>
+            Broj Poena
+          </th>
+        </tr>
+        <tr *ngFor="let score of highScore20Days; let i=index" [attr.data-index]="i" [ngClass]="{myScore: score.username === username}">
+          <td *ngIf="i < 10">
+            {{i + 1}}.
+          </td>
+          <td *ngIf="i < 10">
+            {{score.username}}
+          </td>
+          <td *ngIf="i < 10">
+            {{score.gameDate.toString().substr(0,15)}}
+          </td>
+          <td *ngIf="i < 10">
+            {{score.result}}
+          </td>
+        </tr>
+      </table>
+    </div>
+</mat-card>

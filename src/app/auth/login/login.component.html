@@ -1,0 +1,31 @@
+<mat-card>
+  <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
+
+    <mat-form-field>
+      <input type="text" name="username" matInput placeholder="Korisničko ime" ngModel #username="ngModel" required>
+      <mat-error *ngIf="username.invalid">Morate uneti korisničko ime!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input type="password" name="password" matInput placeholder="Lozinka" ngModel #password="ngModel" required>
+        <mat-error *ngIf="password.invalid">Morate uneti lozinku!</mat-error>
+    </mat-form-field>
+
+    <div class="submitButtonContainer">
+      <button mat-raised-button type="submit" class="submitButton"> Uloguj se </button>
+    </div>
+
+    <div class="forgotPass">
+      <a routerLink="/forgot-pass">
+        Zaboravio sam lozinku
+      </a>
+    </div>
+    <div class="forgotPass">
+      <a routerLink="/high-scores">
+        Nastavi kao gost
+      </a>
+    </div>
+
+  </form>
+
+</mat-card>

@@ -1,0 +1,83 @@
+<mat-card>
+  <form [formGroup]="form" (submit)="onRegister()">
+
+    <div class="image-preview" *ngIf="imagePreview && imagePreview !== '' && form.get('image').valid">
+      <img [src]="imagePreview">
+    </div>
+
+    <!-- Name -->
+    <mat-form-field>
+      <input type="text" matInput formControlName="name" name="name" placeholder="Ime">
+      <mat-error *ngIf="form.get('name').invalid"> Morate uneti ime! </mat-error>
+    </mat-form-field>
+
+    <!-- Surname -->
+    <mat-form-field>
+      <input type="text" matInput formControlName="surname" name="surname" placeholder="Prezime">
+      <mat-error *ngIf="form.get('surname').invalid"> Morate uneti prezime! </mat-error>
+    </mat-form-field>
+
+    <!-- Email -->
+    <mat-form-field>
+      <input type="email" matInput formControlName="email" name="email" placeholder="E-mail">
+      <mat-error *ngIf="form.get('email').invalid"> Morate uneti adresu elektronske pošte! </mat-error>
+    </mat-form-field>
+
+    <!-- Occupation -->
+    <mat-form-field>
+      <input type="text" matInput formControlName="occupation" name="occupation" placeholder="Zanimanje">
+      <mat-error *ngIf="form.get('occupation').invalid"> Morate uneti zanimanje! </mat-error>
+    </mat-form-field>
+
+    <!-- Username -->
+    <mat-form-field>
+      <input type="text" matInput formControlName="username" name="username" placeholder="Korisničko ime">
+      <mat-error *ngIf="form.get('username').invalid"> Morate uneti korisničko ime! </mat-error>
+    </mat-form-field>
+
+    <!-- Password -->
+    <mat-form-field>
+      <input matInput formControlName="password" type="password" name="password" placeholder="Lozinka">
+      <mat-error *ngIf="form.get('password').invalid">Br Malih slova: 3, Br Velikih slova: 1, Br Brojeva: 1, Br Specijalnih znakova: 1, Dužina između 8 i 12 znakova</mat-error>
+    </mat-form-field>
+
+    <!-- Confirm Password -->
+    <mat-form-field>
+      <input matInput formControlName="confirmPassword" type="password" name="confirmPassword" placeholder="Potvrda lozinke">
+      <mat-error *ngIf="form.get('confirmPassword').invalid">Lozinke se ne poklapaju!</mat-error>
+    </mat-form-field>
+
+    <!-- JMBG -->
+    <mat-form-field>
+      <input matInput formControlName="jmbg" type="text" name="jmbg" placeholder="JMBG">
+      <mat-error *ngIf="form.get('jmbg').invalid">Nije dobar format!</mat-error>
+    </mat-form-field>
+
+    <!-- Question -->
+    <mat-form-field>
+      <input matInput formControlName="question" type="text" name="question" placeholder="Pitanje za poništavanje lozinke">
+      <mat-error *ngIf="form.get('question').invalid"> Morate uneti pitanje! </mat-error>
+    </mat-form-field>
+
+    <!-- Answer -->
+    <mat-form-field>
+      <input matInput formControlName="answer" type="text" name="answer" placeholder="Odgovor">
+      <mat-error *ngIf="form.get('answer').invalid"> Morate uneti odgovor! </mat-error>
+    </mat-form-field>
+
+    <!-- Image -->
+    <div class="imageDiv">
+      <input type="file" class="hidden" #filePicker (change)="onImagePicked($event)">
+      <button mat-raised-button class="selectImgButton" type="button" (click)="filePicker.click()">Izaberi sliku</button>
+    </div>
+
+    <div class="submitButtonContainer">
+      <button class="submitButton" mat-raised-button color="primary" type="submit">Registruj se</button>
+    </div>
+
+    <div class="errorDiv">
+      <span class="error" *ngIf="form.get('image').invalid"> Morate odabrati fotografiju! </span>
+    </div>
+
+  </form>
+</mat-card>

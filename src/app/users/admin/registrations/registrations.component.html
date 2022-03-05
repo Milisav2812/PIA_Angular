@@ -1,0 +1,63 @@
+<div class="warning" *ngIf="registrations.length == 0">
+  Trenutno nema registracija na čekanju!
+</div>
+
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let registration of registrations">
+
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{registration.name}} {{registration.surname}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div class="imageDiv">
+      <img [src]="registration.imagePath" alt="">
+    </div>
+
+    <!-- Name -->
+    <div>
+      <p> <span class="bold"> Ime:</span> {{registration.name}}</p>
+    </div>
+
+    <!-- Surname -->
+    <div>
+      <p> <span class="bold">Prezime: </span>{{registration.surname}}</p>
+    </div>
+
+    <!-- Email -->
+    <div>
+      <p> <span class="bold">E-mail: </span>{{registration.email}}</p>
+    </div>
+
+    <!-- Occupation -->
+    <div>
+      <p> <span class="bold">Zanimanje: </span>{{registration.occupation}}</p>
+    </div>
+
+    <!-- Username -->
+    <div>
+      <p> <span class="bold">Korisničko ime: </span>{{registration.username}}</p>
+    </div>
+
+    <!-- Username -->
+    <div>
+      <p> <span class="bold">Pol: </span> <span *ngIf="registration.gender == 0">Muški</span> <span *ngIf="registration.gender == 1">Ženski</span> </p>
+    </div>
+
+    <!-- Username -->
+    <div>
+      <p> <span class="bold">JMBG: </span>{{registration.jmbg}}</p>
+    </div>
+
+    <!-- Buttons -->
+    <div class="buttonAccept">
+      <button mat-raised-button color="primary" (click)="onAccept(registration)">Prihvati</button>
+    </div>
+
+    <div class="buttonReject">
+      <button mat-raised-button color="warn" (click)="onReject(registration)">Odbij</button>
+    </div>
+
+  </mat-expansion-panel>
+</mat-accordion>

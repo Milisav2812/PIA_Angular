@@ -1,0 +1,14 @@
+mat-card{
+  width: 60%;
+  margin: 20px auto;
+}
+
+mat-form-field{
+  width: 80%;
+  display: block
+}
+
+.createGameButton{
+  background: #e85a4f;
+  color: #eae7dc;
+}

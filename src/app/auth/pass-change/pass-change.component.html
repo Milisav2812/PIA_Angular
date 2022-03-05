@@ -1,0 +1,33 @@
+<mat-card>
+    <form [formGroup]="form" (submit)="onPassChange()">
+
+      <!-- Username -->
+      <mat-form-field>
+        <input type="text" matInput formControlName="username" name="username" placeholder="Korisničko ime">
+        <mat-error *ngIf="form.get('username').invalid"> Morate uneti korisničko ime! </mat-error>
+      </mat-form-field>
+
+      <!-- Old Password -->
+      <mat-form-field>
+        <input matInput formControlName="oldPass" type="password" name="oldPass" placeholder="Stara Lozinka">
+        <mat-error *ngIf="form.get('oldPass').invalid">Morate uneti lozinku!</mat-error>
+      </mat-form-field>
+
+      <!-- New Password -->
+      <mat-form-field>
+        <input matInput formControlName="password" type="password" name="password" placeholder="Lozinka">
+        <mat-error *ngIf="form.get('password').invalid">Morate uneti novu lozinku!</mat-error>
+      </mat-form-field>
+
+      <!-- New Confirm Password -->
+      <mat-form-field>
+        <input matInput formControlName="confirmPassword" type="password" name="confirmPassword" placeholder="Potvrda nove lozinke">
+        <mat-error *ngIf="form.get('confirmPassword').invalid">Lozinke se ne poklapaju!</mat-error>
+      </mat-form-field>
+
+      <div class="submitButtonContainer">
+        <button mat-raised-button class="submitButton" type="submit">Promeni lozinku</button>
+      </div>
+
+    </form>
+  </mat-card>

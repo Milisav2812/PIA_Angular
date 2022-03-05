@@ -1,0 +1,97 @@
+<mat-card *ngIf="showInfo">
+  <div class="userInfoDiv">
+    <img [src]="userInfo.imagePath" alt="">
+    <div class="textDiv">
+      {{userInfo.name}} {{userInfo.surname}}
+    </div>
+    <span>E-mail:</span> {{userInfo.email}}
+    <br>
+    {{userInfo.occupation}}
+  </div>
+</mat-card>
+
+<mat-accordion>
+  <mat-expansion-panel class="firstMatPanel">
+
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Pregledajte registracije
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div class="addGameButtonDiv">
+      <button class="addGameButton" mat-raised-button (click)="onRegistrationSelect()">Registracije</button>
+    </div>
+
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+          Dodavanje igre dana
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div class="addGameButtonDiv">
+      <button class="addGameButton" mat-raised-button (click)="onAddGameOfDay()">Dodajte igru dana</button>
+    </div>
+
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+          Brisanje igre dana
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div class="addGameButtonDiv">
+      <button class="addGameButton" mat-raised-button (click)="onDeleteGameOfDay()">Obrišite igru dana</button>
+    </div>
+
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+          Ažuriranje igre dana
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <form class="updateForm" [formGroup]="form" (submit)="onUpdateGameOfDay()" *ngIf="!alreadyPlayed && gameDefined">
+
+      <div class="dateDiv">
+        <span>Datum:</span> {{gameDate}}
+      </div>
+
+      <h3>Odaberite Anagram:</h3>
+      <mat-form-field>
+        <mat-select placeholder="Anagram" formControlName="anagram">
+          <span *ngFor="let anagram of anagrams">
+            <mat-option value="{{anagram._id}}">
+              {{anagram ? anagram.phrase : ""}} :: {{anagram ? anagram.result : ""}}
+            </mat-option>
+          </span>
+        </mat-select>
+      </mat-form-field>
+
+      <div>
+        <button class="updateGameButton" mat-raised-button type="submit" [disabled]="form.invalid">Ažurirajte igru dana</button>
+      </div>
+    </form>
+
+    <div class="messageDiv" *ngIf="alreadyPlayed && !gameDefined">
+      Današnja igra je već odigrana!
+    </div>
+
+    <div class="messageDiv" *ngIf="!gameDefined && !alreadyPlayed">
+      Nije definisana igra za današnji dan!
+    </div>
+
+  </mat-expansion-panel>
+
+</mat-accordion>
+

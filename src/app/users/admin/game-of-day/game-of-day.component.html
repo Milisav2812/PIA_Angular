@@ -1,0 +1,28 @@
+<mat-card>
+  <form [formGroup]="form" (submit)="onCreateGame()">
+
+    <h2>1. Odaberite Datum Igre:</h2>
+    <mat-form-field>
+      <input matInput [min]="todayDate" formControlName="gameDate" [matDatepicker]="picker" placeholder="Izaberite Datum">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <h2>2. Odaberite Anagram:</h2>
+    <mat-form-field>
+      <mat-select placeholder="Anagram" formControlName="anagram">
+        <span *ngFor="let anagram of anagrams">
+          <mat-option value="{{anagram._id}}">
+            {{anagram.phrase}} :: {{anagram.result}}
+          </mat-option>
+        </span>
+      </mat-select>
+    </mat-form-field>
+
+    <div>
+      <button class="createGameButton" mat-raised-button type="submit" [disabled]="form.invalid">Kreirajte Igru Dana</button>
+    </div>
+  </form>
+</mat-card>
+
+
